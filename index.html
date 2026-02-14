@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshua ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+
+body{
+  background:url("Img/valentine.jpeg") center/cover no-repeat;
+  color:white;
+  overflow-x:hidden;
+  text-align:center;
+}
+
+/* DARK GLASS OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(6px);
+  z-index:-1;
+}
+
+/* START SCREEN */
+.start-screen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:black;
+  z-index:9999;
+}
+
+.start-screen h1{
+  font-size:2.5rem;
+  color:#ff4b6e;
+  margin-bottom:25px;
+  animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px #ff4b6e;}
+  to{text-shadow:0 0 25px #ff4b6e;}
+}
+
+.start-btn{
+  padding:18px 45px;
+  border:none;
+  border-radius:50px;
+  background:#ff4b6e;
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+.hero h1{
+  font-size:3rem;
+  color:#ffd6e0;
+  margin-bottom:15px;
+}
+
+.hero p{color:#ffc0cb;margin-bottom:30px;}
+
+.buttons{display:flex;gap:25px;}
+
+button{
+  padding:18px 45px;
+  border:none;
+  border-radius:60px;
+  font-size:20px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.3s;
+}
+
+.yes{
+  background:white;
+  color:#ff4b6e;
+  box-shadow:0 0 25px rgba(255,75,110,1);
+}
+
+.yes:hover{transform:scale(1.2);background:#ff4b6e;color:white;}
+
+.no{background:#ffc0cb;color:white;}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(.6);
+  background:rgba(255,192,203,.97);
+  color:#ff2e63;
+  padding:40px;
+  border-radius:25px;
+  max-width:420px;
+  font-size:1.3rem;
+  font-weight:bold;
+  opacity:0;
+  transition:.5s;
+  z-index:1000;
+}
+
+.popup.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
+
+/* FLOATING HEARTS */
+.heart{
+  position:fixed;
+  bottom:-40px;
+  font-size:26px;
+  animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+  to{transform:translateY(-120vh) scale(1.6);opacity:0;}
+}
+
+/* YES CONTENT */
+#yesContent{display:none;padding:60px 20px;}
+
+/* LOVE LETTER BOOK */
+.love-letter{
+  max-width:950px;
+  margin:auto;
+  padding:50px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(18px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+  display:flex;
+  gap:40px;
+  align-items:center;
+  animation:fadeUp 1.8s forwards;
+  opacity:0;
+  transform:translateY(60px);
+}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
+/* LETTER TEXT */
+.letter-text{flex:1;text-align:left; opacity:0; transform:translateY(20px); transition:1s ease;}
+.letter-text.show{opacity:1; transform:translateY(0);}
+.letter-text h2{color:#ffb3c6;margin-bottom:18px;}
+.letter-text p{line-height:1.7;margin-bottom:14px;color:#fff1f3;}
+.letter-image img{max-width:320px;width:100%;border-radius:20px;border:3px solid #ff4b6e;}
+
+/* PHOTO GALLERY */
+.photo-gallery{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:30px;
+  margin-top:50px;
+  position:relative;
+}
+
+.photo-gallery img{
+  width:250px;
+  height:250px;
+  object-fit:cover;
+  border-radius:20px;
+  border:3px solid #ff4b6e;
+  box-shadow:0 15px 30px rgba(0,0,0,0.5);
+  transition: transform 1.5s ease, box-shadow 0.5s, filter 0.5s;
+  opacity:0;
+  position:relative;
+  cursor:pointer;
+}
+
+.photo-gallery img:hover{
+  transform:scale(1.1);
+  box-shadow:0 25px 50px rgba(255,75,110,0.7);
+  filter:brightness(1.1);
+}
+
+/* LOOPING LOVE TEXT */
+#loveLoopText{
+  font-size:2rem;
+  color:#fff1f3;
+  margin-top:30px;
+  font-weight:bold;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .love-letter{flex-direction:column;text-align:center;}
+  .letter-text{text-align:center;}
+  .photo-gallery img{width:80%; height:auto;}
+  #loveLoopText{font-size:1.5rem;}
+}
+
+@media(max-width:480px){
+  .hero h1 { font-size:2rem; }
+  .hero p { font-size:1rem; }
+  .photo-gallery img { width:70%; max-width:200px; }
+  .love-letter { padding:5vw; }
+  #loveLoopText { font-size:1.2rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="mySong.mp3" type="audio/mp3">
+</audio>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="start-screen">
+  <h1>💖 Tap to Unlock Something Special 💖</h1>
+  <button class="start-btn" onclick="startExperience()">Unlock 💌</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Joshua 💖</h1>
+  <p>There is something important I want to ask you…</p>
+  <p>Will You be My Valentine?</p>
+
+  <div class="buttons">
+    <button onclick="sayYes()" class="yes">YES 💍</button>
+    <button onclick="sayNo()" class="no">NO 🙈</button>
+  </div>
+</section>
+
+<div id="popup" class="popup"></div>
+
+<!-- YES CONTENT -->
+<section id="yesContent">
+
+  <div class="love-letter">
+    <div class="letter-text" id="letterText">
+      <h2>My Dearest Joshua ❤️</h2>
+      <p id="typingText"></p>
+      <p><strong>Forever Yours ❤️</strong><br>Alex, your Kababah 💖</p>
+    </div>
+    <div class="letter-image">
+      <img src="lex.jpeg" alt="Alex">
+    </div>
+  </div>
+
+  <!-- PHOTO GALLERY -->
+  <div class="photo-gallery" id="photoGallery">
+    <img src="josh.jpeg" alt="Joshua">
+    <img src="alekii.jpeg" alt="Alex">
+  </div>
+
+  <!-- LOOPING LOVE TEXT -->
+  <div id="loveLoopText"></div>
+
+</section>
+
+<script>
+/* START EXPERIENCE */
+function startExperience(){
+  document.getElementById("startScreen").style.display="none";
+  
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.volume = 0; 
+  bgMusic.play();
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.02;
+    if(vol >= 1){
+      vol = 1;
+      clearInterval(fade);
+    }
+    bgMusic.volume = vol;
+  }, 100);
+}
+
+/* YES */
+function sayYes(){
+  const popup=document.getElementById("popup");
+  popup.innerHTML="💖 You just made my heart the happiest in the universe 💖";
+  popup.classList.add("show");
+
+  /* HEART EXPLOSION */
+  const colors = ["#ff4b6e","#ffb3c6","#ffc0cb","#ff69b4"];
+  for(let i=0;i<45;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize = (20 + Math.random()*30) + "px";
+    h.style.color = colors[Math.floor(Math.random()*colors.length)];
+    h.style.animationDuration=(4 + Math.random()*3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }
+
+  setTimeout(()=> {
+    popup.classList.remove("show");
+
+    const yes=document.getElementById("yesContent");
+    yes.style.display="block";
+    yes.scrollIntoView({behavior:"smooth"});
+
+    const bgMusic = document.getElementById("bgMusic");
+    let targetVol = 1;
+    let fadeIn = setInterval(() => {
+      if(bgMusic.volume < targetVol){
+        bgMusic.volume = Math.min(bgMusic.volume + 0.02, targetVol);
+      } else {
+        clearInterval(fadeIn);
+      }
+    }, 100);
+
+    document.getElementById("letterText").classList.add("show");
+
+    const gallery = document.querySelectorAll("#photoGallery img");
+    gallery.forEach((img, idx)=>{
+      const startX = (Math.random()*2-1)*1000;
+      const startY = (Math.random()*2-1)*800;
+      const startRot = (Math.random()*2-1)*45;
+      img.style.transform = `translate(${startX}px, ${startY}px) rotate(${startRot}deg) scale(0.5)`;
+      img.style.opacity = 0;
+
+      setTimeout(()=>{
+        img.style.transition = "all 1.5s ease-out";
+        img.style.transform = "translate(0,0) rotate(0deg) scale(1)";
+        img.style.opacity = 1;
+      }, idx * 500);
+    });
+
+    startTyping();
+
+    setTimeout(startLoveLoop, 4000);
+
+  },3000);
+}
+
+/* NO */
+function sayNo(){
+  const popup=document.getElementById("popup");
+  popup.innerHTML="😏 Nice try… my heart already chose you ❤️";
+  popup.classList.add("show");
+  setTimeout(()=>popup.classList.remove("show"),2500);
+}
+
+/* TYPING LOVE CONFESSION */
+const message =
+"From the moment you walked into my life, everything changed. " +
+"You became my peace, my happiness, and the reason my days feel brighter. " +
+"I want to laugh with you, grow with you, annoy you a little 😄, " +
+"and love you endlessly through every season of life. " +
+"You are not just my Valentine… you are my forever.";
+
+let i=0;
+function startTyping(){
+  const el=document.getElementById("typingText");
+  const interval=setInterval(()=>{
+    el.textContent+=message[i];
+    i++;
+    if(i>=message.length) clearInterval(interval);
+  },35);
+}
+
+/* LOOPING LOVE TEXT */
+const loveMessages = ["JOSH LOVES ALEX ❤️", "ALEX LOVES JOSH ❤️"];
+let msgIndex = 0;
+let charIndex = 0;
+let typingForward = true;
+const loopSpeed = 100;
+
+function startLoveLoop(){
+    const el = document.getElementById("loveLoopText");
+
+    setInterval(()=>{
+        if(typingForward){
+            el.textContent += loveMessages[msgIndex][charIndex];
+            charIndex++;
+            if(charIndex === loveMessages[msgIndex].length){
+                typingForward = false;
+                setTimeout(()=>{}, 800);
+            }
+        } else {
+            el.textContent = el.textContent.slice(0, -1);
+            charIndex--;
+            if(charIndex === 0){
+                typingForward = true;
+                msgIndex = (msgIndex + 1) % loveMessages.length;
+            }
+        }
+    }, loopSpeed);
+}
+</script>
+
+</body>
+</html>

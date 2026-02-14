@@ -1,0 +1,230 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+body{
+  background:url("valentine.jpeg") no-repeat center/cover;
+  color:white;
+  text-align:center;
+  overflow:auto;
+}
+
+/* DARK OVERLAY */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh; /* changed from height:100vh */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.typing{
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.hero h2{
+  margin-bottom:20px;
+  color:#ffd6e0;
+}
+
+/* BUTTONS */
+.buttons{
+  display:flex;
+  gap:20px;
+}
+
+button{
+  padding:15px 30px;
+  border:none;
+  border-radius:40px;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.yes{
+  background:white;
+  color:#ff4b6e;
+}
+
+.yes:hover{
+  background:#ff4b6e;
+  color:white;
+  transform:scale(1.1);
+}
+
+.no{
+  background:#ffc0cb;
+  color:white;
+}
+
+.no:hover{
+  background:#ff8fab;
+}
+
+/* VIDEO */
+.section{
+  padding:40px 20px;
+}
+
+.video-container iframe{
+  width:90%;
+  max-width:600px;
+  height:340px;
+  border-radius:15px;
+  border:none;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+/* CONFETTI */
+#confetti{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+/* YES SECTION ANIMATION */
+#yesContent{
+  display:none;
+  opacity:0;
+  transition: opacity 1s ease, transform 1s ease;
+  transform: translateY(50px);
+}
+
+#yesContent.show{
+  display:block;
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* ROTATING MESSAGES */
+.rotatingTyping{
+  font-size:1.5rem;
+  margin-bottom:20px;
+  color:#ff4b6e;
+}
+
+/* LOVE QUOTES */
+.love-quotes{
+  font-size:1.2rem;
+  color:#ffc0cb;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+/* FANCY POPUP */
+.popup{
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.5);
+  background: rgba(255,204,213,0.95);
+  color: #ff4b6e;
+  padding: 20px 40px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity:0;
+  pointer-events:none;
+  transition: all 0.5s ease;
+  z-index:1000;
+}
+
+.popup.show{
+  opacity:1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* LOVE LETTER STYLING - Book style */
+.love-letter {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 30px auto 0 auto;
+  max-width: 800px;
+  padding: 30px;
+  border: 2px solid #ff4b6e;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px); /* soft glass effect */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+
+  /* Hidden initially */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.love-letter.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Letter text */
+.love-letter .letter-text {
+  flex: 1;
+  color: #fff1f3;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: left;
+  padding-right: 20px;
+}
+
+/* Letter image */
+.love-letter .letter-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.love-letter .letter-image img {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  border: 2px solid #ff4b6e;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  object-fit: cover;
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 768px) {
+  .love-letter {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .love-letter .letter-text {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .love-letter .letter-image {
+    margin-top: 20px;
+  }
+}
